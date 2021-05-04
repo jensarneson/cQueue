@@ -77,6 +77,9 @@ void qDestroy(Queue *q, void (*kill)(QData))
 {
   QResult result;
   while ((result = qNext(q)).hasData) {
-    kill(result.payload.data);
+    if (kill) {
+      kill(result.u.data);
+    }
   }
+  free(q);
 }

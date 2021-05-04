@@ -10,7 +10,7 @@ typedef struct QResult {
   union {
     QData data;
     void *none;
-  } payload;
+  } u;
 } QResult;
 
 typedef struct Queue Queue;

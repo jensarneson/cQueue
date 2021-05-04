@@ -7,5 +7,5 @@
 
 int main()
 {
-  printf("%s\n", hello());
+  printf("Queue\n");
 }
