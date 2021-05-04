@@ -39,11 +39,35 @@ static void test_queue_next(void)
   qDestroy(q, NULL);
 }
 
+static void test_queue_peek(void)
+{
+  Queue *q = mkQueue();
+  TEST_ASSERT_NOT_NULL_MESSAGE(q, "Failed to allocate queue");
+  QData expected[12] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+
+  QResult result = qPeek(q);
+  TEST_ASSERT_FALSE_MESSAGE(result.hasData, "Peek correctly got nothing");
+
+  qFromBuffer(q, 12, expected);
+
+  result = qPeek(q);
+  TEST_ASSERT_MESSAGE(result.hasData, "Peek failed to get data");
+  TEST_ASSERT_EQUAL_INT(0, result.u.data);
+
+  result = qPeek(q);
+  TEST_ASSERT_MESSAGE(result.hasData, "Peek failed to get data");
+  TEST_ASSERT_EQUAL_INT_MESSAGE(0, result.u.data, "Peek appears destructive");
+
+  TEST_ASSERT_QUEUE_EQUALS(12, expected, q);
+  qDestroy(q, NULL);
+}
+
 int main(void)
 {
    UnityBegin("test/test_queue.c");
 
    RUN_TEST(test_queue_next);
+   RUN_TEST(test_queue_peek);
 
    return UnityEnd();
 }
