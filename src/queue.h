@@ -3,7 +3,11 @@
 
 #include <stdbool.h>
 
-typedef int QData;
+#ifndef QUEUE_DATA_T
+#define QUEUE_DATA_T int
+#endif
+
+typedef QUEUE_DATA_T QData;
 
 typedef struct QResult {
   bool hasData;
