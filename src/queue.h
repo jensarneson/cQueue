@@ -17,6 +17,8 @@ typedef struct QResult {
   } u;
 } QResult;
 
+// in implementation file, define struct queue
+// this is so we dont have to type "struct Queue" every goddamn time
 typedef struct Queue Queue;
 
 Queue *mkQueue(void);
